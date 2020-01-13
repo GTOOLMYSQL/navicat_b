@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { getConnection } from 'typeorm';
+import { getConnection, createConnection } from 'typeorm';
+import { Connect } from '../connect/Connect.entity';
 
 @Injectable()
 export class DbsService {
@@ -12,6 +13,16 @@ export class DbsService {
   }
 
   async findAllSchemas() {
+    // // 创建连接
+    // const tempConnection = createConnection({
+    //   type: 'mysql',
+    //   host: connect.ip,
+    //   port: parseInt(connect.port),
+    //   username: connect.username,
+    //   password: connect.password,
+    // });
+
+    // 从连接中获取数据库
     const sql = `select * from information_schema.SCHEMATA`;
     const result = await this.connection.query(sql);
     return result;

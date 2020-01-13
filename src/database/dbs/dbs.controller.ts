@@ -1,4 +1,4 @@
-import { Controller, Get, Request } from '@nestjs/common';
+import { Controller, Get, Request, Param } from '@nestjs/common';
 import { DbsService } from './dbs.service';
 
 @Controller('dbs')
@@ -10,8 +10,8 @@ export class DbsController {
     return this.dbsService.findAllDBs(params);
   }
 
-  @Get('/schemas')
-  getAllSchemas() {
+  @Get('/schemas/:connectId')
+  getAllSchemas(@Param() connectId: string) {
     return this.dbsService.findAllSchemas();
   }
 }
